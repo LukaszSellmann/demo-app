@@ -6,7 +6,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: {{ .Chart.Name }}
 spec:
-  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/instance: {{ .Chart.Name }}

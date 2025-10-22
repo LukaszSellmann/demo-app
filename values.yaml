@@ -1,7 +1,5 @@
 namespace: monitoring-demo-app
 
-#replicaCount: 2
-
 image:
   repository: lukaszsel/monitoring-demo-app
   tag: "latest"
