@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Chart.Name }}-monitor
+  labels:
+    release: {{ .Values.prometheus.release }}
+spec:
+  endpoints:
+    - interval: {{ .Values.serviceMonitor.interval | default "30s" }}
+      port: {{ .Values.serviceMonitor.port }}
+      path: {{ .Values.serviceMonitor.path }}
+      scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Chart.Name }}

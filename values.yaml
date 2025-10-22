@@ -1,0 +1,39 @@
+namespace: monitoring-demo-app
+
+replicaCount: 2
+
+image:
+  repository: lukaszsel/monitoring-demo-app
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  protocol: "TCP"
+  targetPort: 8000
+
+prometheus:
+  release: prometheus
+
+serviceMonitor:
+  interval: 15s
+  port: http
+  path: /metrics
+  scrapeTimeout: 10s
+
+scaller:
+  type: Utilization
+  averageUtilization: 10
+  minReplicas: 2
+  maxReplicas: 6
+
+ingress:
+  ingressClassName: nginx
+  host: mondemo.sellmann.pl
+  path: /
+  pathtype: Prefix
+  portnumber: 80
+
+env:
+  name: dev
